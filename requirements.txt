@@ -1,0 +1,8 @@
+flask
+flask-cors
+mysql-connector-python
+requests
+tensorflow
+numpy
+pillow
+python-dateutil
