@@ -10,12 +10,12 @@ import json
 
 
 modelo = tf.keras.applications.MobileNetV2(
-    weights="imagenet",
+    weights=None,
     include_top=False,
     pooling="avg",
     input_shape=(224, 224, 3)
 )
-
+modelo.load_weights("models/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_1.0_224_no_top.h5")
 
 app = Flask(__name__)
 CORS(app)
