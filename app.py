@@ -7,6 +7,7 @@ from datetime import datetime, date, timedelta
 import tensorflow as tf
 import recognition
 import json
+import os
 
 
 modelo = tf.keras.applications.MobileNetV2(
