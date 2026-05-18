@@ -16,6 +16,7 @@ modelo = None
 app = Flask(__name__)
 CORS(app)
 def load_model():
+    global modelo
     if modelo is None:
         inputs = Input(shape=(224,224,3))
         modelo = tf.keras.applications.MobileNetV2(
