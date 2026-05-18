@@ -5,16 +5,19 @@ import requests
 from recomendation import recommend_outfit, update_user_model
 from datetime import datetime, date, timedelta
 import tensorflow as tf
+from tensorflow.keras import Input
+from tensorflow.keras.applications import MobileNetV2
 import recognition
 import json
 import os
 
 
-modelo = tf.keras.applications.MobileNetV2(
+inputs = Input(shape=(224,224,3))
+modelo = MobileNetV2(
     weights=None,
     include_top=False,
     pooling="avg",
-    input_shape=(224, 224, 3)
+    input_tensor=inputs
 )
 modelo.load_weights("models/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_1.0_224_no_top.h5")
 
