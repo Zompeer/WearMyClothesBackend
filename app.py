@@ -11,19 +11,23 @@ import json
 import os
 
 
-inputs = Input(shape=(224,224,3))
-modelo = tf.keras.applications.MobileNetV2(
-    weights=None,
-    include_top=False,
-    pooling="avg",
-    input_tensor=inputs
-)
-modelo.load_weights("models/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_1.0_224_no_top.h5")
+modelo = None
 
 app = Flask(__name__)
 CORS(app)
-
+def load_model():
+    if modelo is None:
+        inputs = Input(shape=(224,224,3))
+        modelo = tf.keras.applications.MobileNetV2(
+        weights=None,
+        include_top=False,
+        pooling="avg",
+        input_tensor=inputs
+    )
+    modelo.load_weights("models/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_1.0_224_no_top.h5")
+    
 def get_db():
+    
     return mysql.connector.connect(
         host=os.environ["MYSQLHOST"],
         user=os.environ["MYSQLUSER"],
@@ -326,6 +330,7 @@ def request_token():
 
 @app.route("/newCloth", methods=["POST"])
 def add_cloth():
+    load_model()
     try:
         data = request.json or {}
 
@@ -407,6 +412,7 @@ def delete_cloth():
     
 @app.route("/alterCloth", methods=["POST"])
 def alterCloth():
+    load_model()
     try:
         data = request.json or {}
 
@@ -669,6 +675,7 @@ def level_up():
 
 @app.route("/scanCloth", methods=["POST"])
 def scan_test():
+    load_model()
     try:
         owner = request.form.get("owner", None)
         if owner is None:
