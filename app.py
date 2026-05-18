@@ -6,14 +6,13 @@ from recomendation import recommend_outfit, update_user_model
 from datetime import datetime, date, timedelta
 import tensorflow as tf
 from tensorflow.keras import Input
-from tensorflow.keras.applications import MobileNetV2
 import recognition
 import json
 import os
 
 
 inputs = Input(shape=(224,224,3))
-modelo = MobileNetV2(
+modelo = tf.keras.applications.MobileNetV2(
     weights=None,
     include_top=False,
     pooling="avg",
