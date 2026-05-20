@@ -429,7 +429,7 @@ def alterCloth():
             cur.execute("UPDATE cloth SET dirtiness=%s WHERE id=%s", (dirtiness, cloth_id))
         if(image is not None):
             embedding = recognition.generar_embedding(image, modelo=modelo)
-            embedding = json.dumps(embedding)
+            embedding = json.dumps(embedding.tolist())
             cur.execute("UPDATE cloth SET image=%s, embedding=%s WHERE id=%s", (image, embedding, cloth_id))
         if(name is not None):
             cur.execute("UPDATE cloth SET name=%s WHERE id=%s", (name, cloth_id))
