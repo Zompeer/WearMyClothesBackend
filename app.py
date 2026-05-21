@@ -205,7 +205,7 @@ def dropFolder():
         cur = conn.cursor(dictionary=True)
 
         cur.execute("DELETE FROM folder WHERE id=%s", (folder_id,))
-        cur.execute("UPDATE cloth SET folder_id=1 WHERE folder_id=NULL")
+        cur.execute("UPDATE cloth SET folder_id=1 WHERE folder_id IS NULL")
         conn.commit()
         cur.close()
         conn.close()
